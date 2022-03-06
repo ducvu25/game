@@ -138,6 +138,14 @@ void ClearNguoi(int x, int y){
 		gotoXY(x, y + 4);	cout << "                       ";
 }
 void VeVatCan(int x, int y, int d){
+	if(d == 50){
+		TextColor(12);
+		gotoXY(x, y + 1);	cout << "  =O  ";
+		gotoXY(x, y + 2);	cout << "  /|  ";
+		gotoXY(x, y + 2);	cout << (char) 3;
+		gotoXY(x, y + 3);	cout << "   |   ";
+		gotoXY(x, y + 4);	cout << "  / \\  ";
+	}else
 	if(d == 4 || d == 6){
 		TextColor(7);
 		gotoXY(x, y + 0);	cout << "==========||              ";
@@ -178,6 +186,9 @@ void VeVatCan(int x, int y, int d){
 }
 int KT(int xn, int yn, int xv, int yv, int tt, int d){
 	if(tt == 1){
+		if(d == 50)
+			if(((xn + 1 <= xv && xn + 9 >= xv) || xn + 3 == xv) && ( yn >= yv - 4 && yn <= yv + 3) ) 
+				return 1;
 		if(d == 1 || d == 2 || d == 0)
 			if(( (xn + 1 <= xv && xn + 9 >= xv) || xn + 3 == xv) && ( yn >= yv - 4 && yn <= yv + 2) )
 				return 1;
@@ -188,6 +199,9 @@ int KT(int xn, int yn, int xv, int yv, int tt, int d){
 			if((((xn + 1 <= xv && xn + 9 >= xv) || (xn <= xv + 24)) && (yn + 2 >= yv && yn <= yv + 4)) || (yn <= yv && yn + 3 >= yv && xv - 40 < xn && xn < xv + 24 ) )
 				return 1;
 	}else{
+		if(d == 50)
+			if(((xn + 1 <= xv && xn + 9 >= xv) || xn + 3 == xv) && ( yn >= yv - 4 && yn <= yv + 3))
+				return 1;
 		if(d == 1 || d == 2 || d == 0)
 			if(( (xn + 1 <= xv && xn + 9 >= xv) || xn + 3 == xv) && ( yn >= yv - 4 && yn <= yv + 2) )
 				return 1;
@@ -195,12 +209,12 @@ int KT(int xn, int yn, int xv, int yv, int tt, int d){
 			if(((xn + 1 <= xv && xn + 9 >= xv) || xn + 3 == xv) && ( yn >= yv - 4 && yn <= yv + 3))
 				return 1;
 		if(d == 4 || d == 6)
-			if((((xn + 1 <= xv && xn + 9 >= xv) || (xn <= xv + 24)) && (yn + 2 >= yv && yn <= yv + 4)) || (yn <= yv && yn + 2 >= yv && xv - 40 < xn && xn < xv + 24 ) )
+			if((((xn + 1 <= xv && xn + 9 >= xv) || (xn <= xv + 24)) && (yn + 2 >= yv && yn <= yv + 4)) || (yn <= yv && yn + 2 >= yv && xv - xv/3 < xn && xn < xv + 24 ) )
 				return 1;
 	}
 }
 int main(){
-	int k, k1, caidat = 2;
+	int k, k1, caidat = 2, win;
 	char dk;
 	char a1[100], a2[100], a3[100], a4[100];
 	strcpy(a1, "Bat dau");
@@ -209,12 +223,14 @@ int main(){
 	strcpy(a4, "Chuc nang:");
 	do{	
 		clrscr();
+		int xn = 5, yn = 20, hd = 0, tt = 1, batdau = 0, bay = 1, henXui = 1, xv = 80, yv = 13, honKem = 1, diem = 0;
+		srand(time(0));
+		win = rand() %5 + 20;
 		TaoO(46,12,4);
 		ThemChu(47, 13, a1, a2, a3, a4, 0);
 		cin >> k;
 		switch (k){
 			case 1 :{
-				int xn = 5, yn = 20, hd = 0, tt = 1, batdau = 0, bay = 1, henXui = 1, xv = 80, yv = 13, honKem = 1, diem = 0;
 				clrscr();
 				TextColor(14);
 				gotoXY(5, 25);	cout <<"==================================================================================================================";
@@ -285,11 +301,20 @@ int main(){
 					}
 					if(yv > 20 || yv < 4)
 						yv = 18;
+					if(diem + 1  % win  == 0)
+						henXui = 50;
 					VeVatCan(xv, yv, henXui);
 					Sleep(500/caidat);
+					if(KT(xn, yn, xv, yv, tt, henXui) == 1 && henXui == 50){
+						clrscr();
+						gotoXY(40,10);		cout << " Ban da tim duoc tinh yeu cua minh";
+						getch();
+						break;
+						}	
 					if(KT(xn, yn, xv, yv, tt, henXui) == 1){
 						clrscr();
 						gotoXY(50,10);		cout << "Diem cua ban: " << diem << " - muc: " << caidat;
+						getch();
 						break;
 						}
 					TextColor(14);
