@@ -146,18 +146,18 @@ void VeVatCan(int x, int y, int d){
 		gotoXY(x, y + 3);	cout << "   |   ";
 		gotoXY(x, y + 4);	cout << "  / \\  ";
 	}else
-	if(d == 4 || d == 6){
-		TextColor(7);
-		gotoXY(x, y + 0);	cout << "==========||              ";
-		gotoXY(x, y + 1);	cout << "  _____-------______      ";
-		gotoXY(x, y + 2);	cout << " /      FA, F0      \\    ";
-		gotoXY(x, y + 3);	cout << "/===OOO========OOO===\\   ";
-		gotoXY(x, y + 4);	cout << "    OOO        OOO        ";
-		for(int i =x; i >= x/3; i--){
-			gotoXY(i, y);
-			cout << "-";
-		}
-	}else
+//	if(d == 4 || d == 6){
+//		TextColor(7);
+//		gotoXY(x, y + 0);	cout << "==========||              ";
+//		gotoXY(x, y + 1);	cout << "  _____-------______      ";
+//		gotoXY(x, y + 2);	cout << " /      FA, F0      \\    ";
+//		gotoXY(x, y + 3);	cout << "/===OOO========OOO===\\   ";
+//		gotoXY(x, y + 4);	cout << "    OOO        OOO        ";
+//		for(int i =x; i >= x/3; i--){
+//			gotoXY(i, y);
+//			cout << "-";
+//		}
+//	}else
 	if(d == 3 || d == 5){ // n =4,  h = 4
 		TextColor(10);
 		gotoXY(x, y - 2);	cout << " _ ";
@@ -223,7 +223,7 @@ int main(){
 	strcpy(a4, "Chuc nang:");
 	do{	
 		clrscr();
-		int xn = 5, yn = 20, hd = 0, tt = 1, batdau = 0, bay = 1, henXui = 1, xv = 80, yv = 13, honKem = 1, diem = 0;
+		int xn = 5, yn = 20, hd = 0, tt = 1, batdau = 0, bay = 1, henXui = 1, xv = 80, yv = 13, honKem = 1, diem = 0, kk=0;
 		srand(time(0));
 		win = rand() %5 + 20;
 		TaoO(46,12,4);
@@ -288,9 +288,13 @@ int main(){
 					bay *= -1;
 					VeNguoiBay(xn, yn, bay);
 					}
-					xv--;
-					if(xn == xv)
+					kk++;
+					if(kk == 30/caidat + 1){
+						xv--;
+						kk=0;
+						if(xn == xv)
 						diem ++;
+					}
 					if(xv == 2){
 						ClearNguoi(xv, yv);
 						xv = 80;
@@ -304,7 +308,7 @@ int main(){
 					if(diem + 1  % win  == 0)
 						henXui = 50;
 					VeVatCan(xv, yv, henXui);
-					Sleep(500/caidat);
+					Sleep(20);
 					if(KT(xn, yn, xv, yv, tt, henXui) == 1 && henXui == 50){
 						clrscr();
 						gotoXY(40,10);		cout << " Ban da tim duoc tinh yeu cua minh";
