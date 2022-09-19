@@ -115,7 +115,7 @@ int main(){
 		}	
 		}else
 		if(a <70 && b == 8){
-			gotoXY(10,b);	cout <<"      Do you know ...";
+			gotoXY(10,b);	cout <<"      yeu Duc";
      		gotoXY(a, b);	cout <<"            *******   ******* ";
  			a++; 
   			gotoXY(10,b);
