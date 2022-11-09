@@ -5,7 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include <unistd.h>
-#include "console.h"
+#include <Windows.h>
 #include <math.h>
 
 using namespace std;
@@ -249,6 +249,8 @@ void Tuong(int &xn, int &yn, int map){
 	}
 }
 int main(){
+	cout << "Moi nguoi chia se nho ghi nguon giup minh nhe! Bam phim bat ki de chay!";
+	getch();
 	int k, k1,xn, yn, hd, chieu, xq, yq, time, itime, endd, xcc, ycc, help = 0, map = 1;
 	char dk;
 	char a1[100], a2[100], a3[100], a4[100];
